@@ -416,17 +416,6 @@ class WebSettingsHostApiImpl extends WebSettingsHostApi {
   }
 
   /// Helper method to convert instances ids to objects.
-  Future<void> setGeolocationEnabledFromInstance(
-    WebSettings instance,
-    bool flag,
-  ) {
-    return setGeolocationEnabled(
-      instanceManager.getIdentifier(instance)!,
-      flag,
-    );
-  }
-
-  /// Helper method to convert instances ids to objects.
   Future<void> setUserAgentStringFromInstance(
     WebSettings instance,
     String? userAgentString,

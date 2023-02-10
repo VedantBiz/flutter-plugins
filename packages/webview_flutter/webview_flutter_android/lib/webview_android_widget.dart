@@ -6,10 +6,10 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
-import 'package:webview_pro_android/webview_android_cookie_manager.dart';
-import 'package:webview_pro_platform_interface/webview_flutter_platform_interface.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 import 'src/android_webview.dart' as android_webview;
+import 'webview_android_cookie_manager.dart';
 
 /// Creates a [Widget] with a [android_webview.WebView].
 class WebViewAndroidWidget extends StatefulWidget {
@@ -282,8 +282,6 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
         _setJavaScriptMode(setting.javascriptMode!),
       if (setting.debuggingEnabled != null)
         _setDebuggingEnabled(setting.debuggingEnabled!),
-      if (setting.geolocationEnabled != null)
-        _setGeolocationEnabled(setting.geolocationEnabled!),
       if (setting.zoomEnabled != null) _setZoomEnabled(setting.zoomEnabled!),
     ]);
   }
@@ -432,10 +430,6 @@ class WebViewAndroidPlatformController extends WebViewPlatformController {
 
   Future<void> _setDebuggingEnabled(bool debuggingEnabled) {
     return webViewProxy.setWebContentsDebuggingEnabled(debuggingEnabled);
-  }
-
-  Future<void> _setGeolocationEnabled(bool geolocationEnabled) {
-    return webView.settings.setGeolocation(geolocationEnabled);
   }
 
   Future<void> _setUserAgent(WebSetting<String?> userAgent) {

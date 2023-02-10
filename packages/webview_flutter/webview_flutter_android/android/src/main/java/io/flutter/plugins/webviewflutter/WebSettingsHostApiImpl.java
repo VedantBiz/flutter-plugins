@@ -4,17 +4,9 @@
 
 package io.flutter.plugins.webviewflutter;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebSettingsHostApi;
-
 
 /**
  * Host api implementation for {@link WebSettings}.
@@ -24,7 +16,6 @@ import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebSettingsHost
 public class WebSettingsHostApiImpl implements WebSettingsHostApi {
   private final InstanceManager instanceManager;
   private final WebSettingsCreator webSettingsCreator;
-  private static final int REQUEST_LOCATION = 100;
 
   /** Handles creating {@link WebSettings} for a {@link WebSettingsHostApiImpl}. */
   public static class WebSettingsCreator {
@@ -133,19 +124,5 @@ public class WebSettingsHostApiImpl implements WebSettingsHostApi {
   public void setAllowFileAccess(Long instanceId, Boolean enabled) {
     final WebSettings webSettings = (WebSettings) instanceManager.getInstance(instanceId);
     webSettings.setAllowFileAccess(enabled);
-  }
-
-  @Override
-  public void setGeolocationEnabled(Long instanceId, Boolean enabled) {
-    final WebSettings webSettings = (WebSettings) instanceManager.getInstance(instanceId);
-    webSettings.setGeolocationEnabled(enabled);
-    if (enabled && Build.VERSION.SDK_INT >= 23) {
-      int checkPermission = ContextCompat.checkSelfPermission(WebViewFlutterPlugin.activity, Manifest.permission.ACCESS_COARSE_LOCATION);
-      if (checkPermission != PackageManager.PERMISSION_GRANTED) {
-        ActivityCompat.requestPermissions(WebViewFlutterPlugin.activity,
-                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION},
-                REQUEST_LOCATION);
-      }
-    }
   }
 }

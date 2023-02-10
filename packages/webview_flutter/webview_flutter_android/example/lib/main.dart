@@ -11,8 +11,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:webview_pro_android/webview_surface_android.dart';
-import 'package:webview_pro_platform_interface/webview_flutter_platform_interface.dart';
+import 'package:webview_flutter_android/webview_surface_android.dart';
+import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 import 'navigation_decision.dart';
 import 'navigation_request.dart';
@@ -110,34 +110,32 @@ class _WebViewExampleState extends State<_WebViewExample> {
         ],
       ),
       body: WebView(
-        //initialUrl: 'https:flutter.dev',
-        // initialUrl: 'https://www.weiyun.com/',
-          initialUrl: 'https://www.wjx.cn/jq/27265670.aspx',
-          onWebViewCreated: (WebViewController controller) {
-            _controller.complete(controller);
-          },
-          onProgress: (int progress) {
-            print('WebView is loading (progress : $progress%)');
-          },
-          navigationDelegate: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              print('blocking navigation to $request}');
-              return NavigationDecision.prevent;
-            }
-            print('allowing navigation to $request');
-            return NavigationDecision.navigate;
-          },
-          onPageStarted: (String url) {
-            print('Page started loading: $url');
-          },
-          onPageFinished: (String url) {
-            print('Page finished loading: $url');
-          },
-          javascriptChannels: _createJavascriptChannels(context),
-          javascriptMode: JavascriptMode.unrestricted,
-          userAgent: 'Custom_User_Agent',
-          backgroundColor: const Color(0x80000000),
-        ),
+        initialUrl: 'https://flutter.dev',
+        onWebViewCreated: (WebViewController controller) {
+          _controller.complete(controller);
+        },
+        onProgress: (int progress) {
+          print('WebView is loading (progress : $progress%)');
+        },
+        navigationDelegate: (NavigationRequest request) {
+          if (request.url.startsWith('https://www.youtube.com/')) {
+            print('blocking navigation to $request}');
+            return NavigationDecision.prevent;
+          }
+          print('allowing navigation to $request');
+          return NavigationDecision.navigate;
+        },
+        onPageStarted: (String url) {
+          print('Page started loading: $url');
+        },
+        onPageFinished: (String url) {
+          print('Page finished loading: $url');
+        },
+        javascriptChannels: _createJavascriptChannels(context),
+        javascriptMode: JavascriptMode.unrestricted,
+        userAgent: 'Custom_User_Agent',
+        backgroundColor: const Color(0x80000000),
+      ),
       floatingActionButton: favoriteButton(),
     );
   }

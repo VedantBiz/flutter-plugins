@@ -1,7 +1,3 @@
-## 2.10.4+1
-
-* Merged changes from upsteam
-
 ## 2.10.4
 
 * Updates code for `no_leading_underscores_for_local_identifiers` lint.
@@ -107,17 +103,6 @@
 * Fixes bug preventing `mockito` code generation for tests.
 * Fixes regression where local storage wasn't cleared when `WebViewController.clearCache` was
   called.
-
-## 2.8.3+3
-
-* Fixes file chooser AlertDialog.Builder displays blank on certain devices.
-## 2.8.3+2
-
-* fix flutter analyze issues
-
-## 2.8.3+1
-
-* support image upload、take camera and add geolocation for android
 
 ## 2.8.3
 
